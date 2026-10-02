@@ -1,0 +1,3076 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>NO SMOKE AI — مسیر آزادی</title>
+
+    <style>
+        *{
+            box-sizing:border-box;
+            margin:0;
+            padding:0;
+        }
+
+        :root{
+            --bg:#02040a;
+            --card:#09111f;
+            --card2:#0d1728;
+            --green:#00ff9d;
+            --cyan:#00d9ff;
+            --purple:#8b5cf6;
+            --pink:#ff4d8d;
+            --red:#ff416c;
+            --yellow:#ffd166;
+            --text:#f8fafc;
+            --muted:#8290a5;
+            --line:#ffffff12;
+        }
+
+        html{
+            scroll-behavior:smooth;
+        }
+
+        body{
+            min-height:100vh;
+            color:var(--text);
+            font-family:Tahoma,Arial,sans-serif;
+            background:
+                    radial-gradient(circle at 10% 10%,#00ff9d14,transparent 30%),
+                    radial-gradient(circle at 90% 70%,#8b5cf614,transparent 35%),
+                    var(--bg);
+            overflow-x:hidden;
+        }
+
+        body:before{
+            content:"";
+            position:fixed;
+            inset:0;
+            pointer-events:none;
+            opacity:.45;
+            background:
+                    linear-gradient(#ffffff04 1px,transparent 1px),
+                    linear-gradient(90deg,#ffffff04 1px,transparent 1px);
+            background-size:50px 50px;
+            mask-image:linear-gradient(#000,transparent);
+        }
+
+        #particles{
+            position:fixed;
+            inset:0;
+            pointer-events:none;
+            z-index:0;
+        }
+
+        /* =========================
+        INTRO
+        ========================= */
+
+        #intro{
+            position:fixed;
+            inset:0;
+            z-index:1000;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            background:#02040a;
+            transition:1s;
+        }
+
+        .intro-glow{
+            position:absolute;
+            width:500px;
+            height:500px;
+            border-radius:50%;
+            background:var(--green);
+            filter:blur(180px);
+            opacity:.12;
+        }
+
+        .intro-content{
+            position:relative;
+            z-index:2;
+            text-align:center;
+            width:92%;
+            max-width:800px;
+        }
+
+        .intro-logo{
+            font-size:90px;
+            animation:float 3s infinite;
+            filter:drop-shadow(0 0 30px #00ff9d33);
+        }
+
+        @keyframes float{
+            50%{
+                transform:translateY(-18px) scale(1.07);
+            }
+        }
+
+        .intro-content h1{
+            margin-top:15px;
+            font-size:clamp(50px,11vw,125px);
+            font-weight:900;
+            letter-spacing:-6px;
+            background:linear-gradient(
+                    90deg,
+                    #fff,
+                    var(--green),
+                    var(--cyan),
+                    #fff
+            );
+            background-size:300%;
+            -webkit-background-clip:text;
+            color:transparent;
+            animation:gradient 4s infinite;
+        }
+
+        @keyframes gradient{
+            50%{
+                background-position:100%;
+            }
+        }
+
+        .intro-content p{
+            margin:20px 0 30px;
+            color:var(--muted);
+            line-height:2;
+        }
+
+        .enter{
+            padding:18px 45px;
+            border:0;
+            border-radius:18px;
+            background:linear-gradient(
+                    135deg,
+                    var(--green),
+                    var(--cyan)
+            );
+            color:#00120c;
+            font-weight:900;
+            font-size:17px;
+            cursor:pointer;
+            box-shadow:0 0 80px #00ff9d33;
+            transition:.3s;
+        }
+
+        .enter:hover{
+            transform:scale(1.08);
+            box-shadow:0 0 120px #00ff9d66;
+        }
+
+        /* =========================
+        APP
+        ========================= */
+
+        #app{
+            display:none;
+            position:relative;
+            z-index:2;
+            width:min(1200px,94%);
+            margin:auto;
+            padding-bottom:100px;
+        }
+
+        .header{
+            padding:35px 0 25px;
+        }
+
+        .header-top{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:20px;
+        }
+
+        .header small{
+            color:var(--green);
+            letter-spacing:3px;
+        }
+
+        .header h2{
+            margin-top:8px;
+            font-size:clamp(35px,6vw,65px);
+        }
+
+        .header p{
+            margin-top:7px;
+            color:var(--muted);
+        }
+
+        .storage-pill{
+            display:flex;
+            align-items:center;
+            gap:8px;
+            padding:10px 14px;
+            border-radius:50px;
+            background:#00ff9d0b;
+            border:1px solid #00ff9d25;
+            color:var(--green);
+            font-size:12px;
+            white-space:nowrap;
+        }
+
+        .storage-dot{
+            width:8px;
+            height:8px;
+            border-radius:50%;
+            background:var(--green);
+            box-shadow:0 0 15px var(--green);
+        }
+
+        /* =========================
+        HERO
+        ========================= */
+
+        .hero{
+            position:relative;
+            overflow:hidden;
+            text-align:center;
+            padding:55px 20px;
+            border-radius:35px;
+            background:
+                    radial-gradient(
+                            circle at 50% 0,
+                            #00ff9d18,
+                            transparent 55%
+                    ),
+                    #ffffff05;
+            border:1px solid var(--line);
+            box-shadow:0 40px 120px #000;
+        }
+
+        .hero-ring{
+            position:absolute;
+            width:280px;
+            height:280px;
+            left:50%;
+            top:50%;
+            transform:translate(-50%,-50%);
+            border:1px solid #00ff9d30;
+            border-radius:50%;
+            animation:ring 3s infinite;
+        }
+
+        .hero-ring.two{
+            width:360px;
+            height:360px;
+            border-color:#00d9ff18;
+            animation-delay:1s;
+        }
+
+        @keyframes ring{
+            50%{
+                width:550px;
+                height:550px;
+                opacity:.02;
+            }
+        }
+
+        .hero-label{
+            position:relative;
+            color:var(--green);
+            font-size:12px;
+            letter-spacing:3px;
+        }
+
+        .days{
+            position:relative;
+            font-size:clamp(80px,16vw,160px);
+            line-height:1;
+            margin:10px 0;
+            font-weight:900;
+            background:linear-gradient(#fff,var(--green));
+            -webkit-background-clip:text;
+            color:transparent;
+        }
+
+        .days-text{
+            position:relative;
+            color:#94a3b8;
+        }
+
+        /* =========================
+        GOAL BAR
+        ========================= */
+
+        .goal-box{
+            margin-top:25px;
+            position:relative;
+        }
+
+        .goal-info{
+            display:flex;
+            justify-content:space-between;
+            color:var(--muted);
+            font-size:12px;
+            margin-bottom:8px;
+        }
+
+        .goal-track{
+            height:12px;
+            overflow:hidden;
+            border-radius:20px;
+            background:#ffffff08;
+        }
+
+        .goal-fill{
+            width:0%;
+            height:100%;
+            border-radius:20px;
+            background:linear-gradient(
+                    90deg,
+                    var(--green),
+                    var(--cyan)
+            );
+            box-shadow:0 0 20px #00ff9d55;
+            transition:1s;
+        }
+
+        /* =========================
+        STATS
+        ========================= */
+
+        .stats{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:15px;
+            margin-top:20px;
+        }
+
+        .stat{
+            position:relative;
+            overflow:hidden;
+            padding:25px 15px;
+            text-align:center;
+            border-radius:22px;
+            background:var(--card);
+            border:1px solid var(--line);
+            transition:.3s;
+        }
+
+        .stat:hover{
+            transform:translateY(-6px);
+            border-color:#00ff9d33;
+        }
+
+        .stat:after{
+            content:"";
+            position:absolute;
+            width:100px;
+            height:100px;
+            right:-50px;
+            top:-50px;
+            border-radius:50%;
+            background:#00ff9d0b;
+            filter:blur(20px);
+        }
+
+        .stat-icon{
+            font-size:30px;
+        }
+
+        .stat-value{
+            margin-top:10px;
+            font-size:24px;
+            font-weight:900;
+        }
+
+        .stat-label{
+            margin-top:6px;
+            color:var(--muted);
+            font-size:12px;
+        }
+
+        /* =========================
+        GRID
+        ========================= */
+
+        .grid{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:20px;
+            margin-top:20px;
+        }
+
+        .panel{
+            padding:28px;
+            border-radius:28px;
+            background:var(--card);
+            border:1px solid var(--line);
+        }
+
+        .title{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:10px;
+            margin-bottom:20px;
+        }
+
+        .title h3{
+            font-size:21px;
+        }
+
+        .title span{
+            color:var(--muted);
+            font-size:12px;
+        }
+
+        /* =========================
+        VOICE
+        ========================= */
+
+        .voice-box{
+            text-align:center;
+        }
+
+        .voice-example{
+            color:var(--muted);
+            line-height:2;
+            font-size:14px;
+        }
+
+        .mic{
+            width:130px;
+            height:130px;
+            margin:20px auto;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            border-radius:50%;
+            border:1px solid #00ff9d55;
+            background:#00ff9d0b;
+            color:var(--green);
+            font-size:55px;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        .mic:hover{
+            transform:scale(1.08);
+        }
+
+        .mic.listening{
+            color:var(--red);
+            border-color:#ff416c88;
+            animation:micPulse 1s infinite;
+        }
+
+        @keyframes micPulse{
+            50%{
+                transform:scale(1.12);
+                box-shadow:0 0 80px #ff416c55;
+            }
+        }
+
+        .voice-status{
+            min-height:40px;
+            color:var(--muted);
+            line-height:2;
+        }
+
+        .voice-text{
+            min-height:55px;
+            margin-top:12px;
+            padding:14px;
+            border-radius:15px;
+            background:#ffffff05;
+            color:#cbd5e1;
+        }
+
+        /* =========================
+        AI
+        ========================= */
+
+        .chat{
+            height:430px;
+            display:flex;
+            flex-direction:column;
+        }
+
+        .messages{
+            flex:1;
+            overflow-y:auto;
+            padding:5px;
+        }
+
+        .message{
+            max-width:88%;
+            padding:13px 16px;
+            margin-bottom:10px;
+            border-radius:18px;
+            line-height:1.9;
+            font-size:14px;
+            white-space:pre-line;
+        }
+
+        .message.ai{
+            background:#00ff9d0b;
+            border:1px solid #00ff9d18;
+        }
+
+        .message.user{
+            margin-right:auto;
+            background:#8b5cf612;
+            border:1px solid #8b5cf620;
+        }
+
+        .typing{
+            color:var(--muted);
+        }
+
+        .chat-form{
+            display:flex;
+            gap:8px;
+            margin-top:10px;
+        }
+
+        .chat-input{
+            flex:1;
+            min-width:0;
+            padding:14px;
+            border-radius:14px;
+            border:1px solid var(--line);
+            background:#ffffff05;
+            color:#fff;
+            outline:0;
+        }
+
+        .chat-input:focus{
+            border-color:#00ff9d55;
+        }
+
+        .chat-send{
+            border:0;
+            padding:0 20px;
+            border-radius:14px;
+            cursor:pointer;
+            font-weight:900;
+            background:linear-gradient(
+                    135deg,
+                    var(--green),
+                    var(--cyan)
+            );
+            color:#00120c;
+        }
+
+        /* =========================
+        MISSIONS
+        ========================= */
+
+        .missions{
+            margin-top:20px;
+        }
+
+        .mission{
+            display:flex;
+            align-items:center;
+            gap:14px;
+            padding:17px;
+            margin-top:10px;
+            border-radius:17px;
+            background:#ffffff04;
+            border:1px solid #ffffff08;
+            transition:.3s;
+        }
+
+        .mission:hover{
+            transform:translateX(-4px);
+        }
+
+        .mission-icon{
+            width:45px;
+            height:45px;
+            flex-shrink:0;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            border-radius:14px;
+            background:#00ff9d0d;
+        }
+
+        .mission-info{
+            flex:1;
+        }
+
+        .mission-info b{
+            display:block;
+        }
+
+        .mission-info span{
+            display:block;
+            margin-top:5px;
+            color:var(--muted);
+            font-size:12px;
+        }
+
+        .check{
+            width:32px;
+            height:32px;
+            border-radius:50%;
+            border:1px solid #ffffff20;
+            background:transparent;
+            color:#fff;
+            cursor:pointer;
+        }
+
+        .done{
+            opacity:.45;
+        }
+
+        .done .check{
+            background:var(--green);
+            color:#00120c;
+        }
+
+        /* =========================
+        ACHIEVEMENTS
+        ========================= */
+
+        .achievements{
+            margin-top:20px;
+        }
+
+        .badges{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:12px;
+        }
+
+        .badge{
+            padding:20px 10px;
+            text-align:center;
+            border-radius:18px;
+            background:#ffffff04;
+            border:1px solid var(--line);
+            opacity:.28;
+            filter:grayscale(1);
+            transition:.4s;
+        }
+
+        .badge.unlocked{
+            opacity:1;
+            filter:none;
+            border-color:#00ff9d35;
+            box-shadow:0 0 25px #00ff9d0d;
+        }
+
+        .badge-icon{
+            font-size:35px;
+        }
+
+        .badge b{
+            display:block;
+            margin-top:8px;
+            font-size:12px;
+        }
+
+        .badge small{
+            display:block;
+            margin-top:5px;
+            color:var(--muted);
+        }
+
+        /* =========================
+        PROFILE
+        ========================= */
+
+        .profile{
+            margin-top:20px;
+        }
+
+        .profile-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:12px;
+        }
+
+        .profile-item{
+            padding:17px;
+            border-radius:16px;
+            background:#ffffff04;
+            border:1px solid var(--line);
+        }
+
+        .profile-item span{
+            display:block;
+            color:var(--muted);
+            font-size:11px;
+            margin-bottom:7px;
+        }
+
+        .profile-item b{
+            font-size:15px;
+        }
+
+        /* =========================
+        SETTINGS
+        ========================= */
+
+        .settings{
+            margin-top:20px;
+        }
+
+        .fields{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:10px;
+        }
+
+        .field{
+            width:100%;
+            padding:14px;
+            border-radius:14px;
+            border:1px solid var(--line);
+            background:#ffffff05;
+            color:#fff;
+            outline:0;
+        }
+
+        .field:focus{
+            border-color:#00ff9d55;
+        }
+
+        .actions{
+            display:flex;
+            flex-wrap:wrap;
+            gap:10px;
+            margin-top:12px;
+        }
+
+        .btn{
+            padding:13px 18px;
+            border:0;
+            border-radius:14px;
+            cursor:pointer;
+            font-weight:900;
+        }
+
+        .btn-green{
+            background:#00ff9d12;
+            color:var(--green);
+            border:1px solid #00ff9d25;
+        }
+
+        .btn-blue{
+            background:#00d9ff12;
+            color:var(--cyan);
+            border:1px solid #00d9ff25;
+        }
+
+        .btn-red{
+            background:#ff416c12;
+            color:#ff6b89;
+            border:1px solid #ff416c25;
+        }
+
+        input[type=file]{
+            display:none;
+        }
+
+        /* =========================
+        QUOTE
+        ========================= */
+
+        .quote{
+            margin-top:20px;
+            padding:35px;
+            text-align:center;
+            border-radius:28px;
+            background:
+                    linear-gradient(
+                            135deg,
+                            #00ff9d0b,
+                            #00d9ff08
+                    );
+            border:1px solid #00ff9d12;
+        }
+
+        .quote b{
+            font-size:25px;
+        }
+
+        .quote p{
+            margin-top:10px;
+            color:var(--muted);
+        }
+
+        /* =========================
+        TOAST
+        ========================= */
+
+        .toast{
+            position:fixed;
+            z-index:5000;
+            left:50%;
+            bottom:25px;
+            transform:translate(-50%,120px);
+            padding:15px 25px;
+            border-radius:15px;
+            background:#101827;
+            border:1px solid #ffffff15;
+            box-shadow:0 20px 70px #000;
+            transition:.4s;
+        }
+
+        .toast.show{
+            transform:translate(-50%,0);
+        }
+
+        /* =========================
+        RESPONSIVE
+        ========================= */
+
+        @media(max-width:850px){
+
+            .stats{
+                grid-template-columns:1fr 1fr;
+            }
+
+            .grid{
+                grid-template-columns:1fr;
+            }
+
+            .fields{
+                grid-template-columns:1fr 1fr;
+            }
+
+            .badges{
+                grid-template-columns:1fr 1fr;
+            }
+
+            .profile-grid{
+                grid-template-columns:1fr 1fr;
+            }
+
+        }
+
+        @media(max-width:550px){
+
+            #app{
+                width:92%;
+            }
+
+            .header-top{
+                align-items:flex-start;
+                flex-direction:column;
+            }
+
+            .stats{
+                gap:8px;
+            }
+
+            .stat{
+                padding:18px 7px;
+            }
+
+            .stat-value{
+                font-size:19px;
+            }
+
+            .fields{
+                grid-template-columns:1fr;
+            }
+
+            .profile-grid{
+                grid-template-columns:1fr;
+            }
+
+            .badges{
+                grid-template-columns:1fr 1fr;
+            }
+
+            .chat-send{
+                padding:0 15px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+<canvas id="particles"></canvas>
+
+<!-- INTRO -->
+
+<section id="intro">
+
+    <div class="intro-glow"></div>
+
+    <div class="intro-content">
+
+        <div class="intro-logo">🚭</div>
+
+        <h1>NO SMOKE AI</h1>
+
+        <p>
+            مسیرت را شروع کن.<br>
+            اطلاعاتت ذخیره می‌شود و هر بار که برگردی از همان‌جا ادامه می‌دهی.
+        </p>
+
+        <button class="enter" onclick="enterApp()">
+            شروع مسیر آزادی 🚀
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- APP -->
+
+<main id="app">
+
+    <header class="header">
+
+        <div class="header-top">
+
+            <div>
+
+                <small>AI RECOVERY SYSTEM</small>
+
+                <h2>مسیر آزادی</h2>
+
+                <p>
+                    مربی هوشمند، پیشرفت، مأموریت و پروفایل شخصی تو
+                </p>
+
+            </div>
+
+            <div class="storage-pill">
+
+                <span class="storage-dot"></span>
+
+                <span id="storageStatus">
+اطلاعات ذخیره است
+</span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-ring"></div>
+        <div class="hero-ring two"></div>
+
+        <div class="hero-label">
+            DAYS WITHOUT SMOKING
+        </div>
+
+        <div class="days" id="days">
+            0
+        </div>
+
+        <div class="days-text">
+            روز بدون سیگار
+        </div>
+
+
+        <div class="goal-box">
+
+            <div class="goal-info">
+
+                <span>پیشرفت تا هدف</span>
+
+                <span id="goalText">
+0%
+</span>
+
+            </div>
+
+            <div class="goal-track">
+
+                <div
+                        class="goal-fill"
+                        id="goalFill">
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- STATS -->
+
+    <section class="stats">
+
+        <div class="stat">
+
+            <div class="stat-icon">🚭</div>
+
+            <div
+                    class="stat-value"
+                    id="cigs">
+                0
+            </div>
+
+            <div class="stat-label">
+                سیگارهای نخریده
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">💰</div>
+
+            <div
+                    class="stat-value"
+                    id="money">
+                0
+            </div>
+
+            <div class="stat-label">
+                پول ذخیره‌شده
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">⏱️</div>
+
+            <div
+                    class="stat-value"
+                    id="hours">
+                0
+            </div>
+
+            <div class="stat-label">
+                ساعت بدون سیگار
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">🏆</div>
+
+            <div
+                    class="stat-value"
+                    id="level">
+                1
+            </div>
+
+            <div class="stat-label">
+                سطح آزادی
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- VOICE + AI -->
+
+    <section class="grid">
+
+
+        <!-- VOICE -->
+
+        <div class="panel">
+
+            <div class="title">
+
+                <h3>🎙️ تنظیم با صدا</h3>
+
+                <span>
+ذخیره مستقیم
+</span>
+
+            </div>
+
+            <div class="voice-box">
+
+                <p class="voice-example">
+
+                    لازم نیست فرم پر کنی.
+
+                    <br><br>
+
+                    مثلاً بگو:
+
+                    <br>
+
+                    «روزی ۱۵ نخ می‌کشیدم،
+                    هر پاکت ۲۰ نخ داشت و
+                    قیمتش ۲۰۰ هزار تومن بود.»
+
+                </p>
+
+                <button
+                        class="mic"
+                        id="mic"
+                        onclick="startVoice()">
+
+                    🎙️
+
+                </button>
+
+                <div
+                        class="voice-status"
+                        id="voiceStatus">
+
+                    برای شروع روی میکروفون بزن
+
+                </div>
+
+                <div
+                        class="voice-text"
+                        id="voiceText">
+
+                    متن تشخیص داده‌شده اینجا می‌آید.
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- AI -->
+
+        <div class="panel">
+
+            <div class="title">
+
+                <h3>🤖 مربی هوشمند</h3>
+
+                <span>
+حافظه محلی
+</span>
+
+            </div>
+
+            <div class="chat">
+
+                <div
+                        class="messages"
+                        id="messages">
+
+                    <div class="message ai">
+
+                        سلام! 🌱
+
+                        من مربی مسیر تو هستم.
+
+                        می‌توانی درباره هوس سیگار،
+                        انگیزه، پیشرفت، پول ذخیره‌شده
+                        یا سخت‌ترین قسمت امروز با من حرف بزنی.
+
+                    </div>
+
+                </div>
+
+                <div class="chat-form">
+
+                    <input
+                            id="chatInput"
+                            class="chat-input"
+                            placeholder="مثلاً الان خیلی هوس سیگار کردم..."
+                            autocomplete="off"
+                    >
+
+                    <button
+                            class="chat-send"
+                            onclick="sendChat()">
+
+                        ارسال
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MISSIONS -->
+
+    <section class="panel missions">
+
+        <div class="title">
+
+            <h3>🎯 مأموریت‌های امروز</h3>
+
+            <span id="missionCount">
+0 / 3
+</span>
+
+        </div>
+
+
+        <div class="mission" id="m1">
+
+            <div class="mission-icon">💧</div>
+
+            <div class="mission-info">
+
+                <b>
+                    یک لیوان آب بخور
+                </b>
+
+                <span>
+قبل از تصمیم‌گیری چند جرعه آب بنوش.
+</span>
+
+            </div>
+
+            <button
+                    class="check"
+                    onclick="completeMission(1)">
+
+                ✓
+
+            </button>
+
+        </div>
+
+
+        <div class="mission" id="m2">
+
+            <div class="mission-icon">🫁</div>
+
+            <div class="mission-info">
+
+                <b>
+                    ۱۰ نفس آرام
+                </b>
+
+                <span>
+چند نفس آهسته بکش و یک دقیقه صبر کن.
+</span>
+
+            </div>
+
+            <button
+                    class="check"
+                    onclick="completeMission(2)">
+
+                ✓
+
+            </button>
+
+        </div>
+
+
+        <div class="mission" id="m3">
+
+            <div class="mission-icon">🚶</div>
+
+            <div class="mission-info">
+
+                <b>
+                    ۵ دقیقه حرکت
+                </b>
+
+                <span>
+کمی قدم بزن و محیطت را تغییر بده.
+</span>
+
+            </div>
+
+            <button
+                    class="check"
+                    onclick="completeMission(3)">
+
+                ✓
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ACHIEVEMENTS -->
+
+    <section class="panel achievements">
+
+        <div class="title">
+
+            <h3>
+                🏆 دستاوردها
+            </h3>
+
+            <span>
+باز کردن با پیشرفت
+</span>
+
+        </div>
+
+        <div class="badges">
+
+            <div
+                    class="badge"
+                    id="badge1">
+
+                <div class="badge-icon">🌱</div>
+
+                <b>
+                    شروع مسیر
+                </b>
+
+                <small>
+                    شروع کردی
+                </small>
+
+            </div>
+
+
+            <div
+                    class="badge"
+                    id="badge2">
+
+                <div class="badge-icon">🔥</div>
+
+                <b>
+                    ۳ روز
+                </b>
+
+                <small>
+                    سه روز کامل
+                </small>
+
+            </div>
+
+
+            <div
+                    class="badge"
+                    id="badge3">
+
+                <div class="badge-icon">💎</div>
+
+                <b>
+                    ۷ روز
+                </b>
+
+                <small>
+                    یک هفته
+                </small>
+
+            </div>
+
+
+            <div
+                    class="badge"
+                    id="badge4">
+
+                <div class="badge-icon">👑</div>
+
+                <b>
+                    ۳۰ روز
+                </b>
+
+                <small>
+                    یک ماه
+                </small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROFILE -->
+
+    <section class="panel profile">
+
+        <div class="title">
+
+            <h3>
+                👤 پروفایل ذخیره‌شده من
+            </h3>
+
+            <span id="savedTime">
+--
+</span>
+
+        </div>
+
+        <div class="profile-grid">
+
+            <div class="profile-item">
+
+<span>
+سیگار در روز
+</span>
+
+                <b id="profileDaily">
+                    --
+                </b>
+
+            </div>
+
+
+            <div class="profile-item">
+
+<span>
+نخ داخل پاکت
+</span>
+
+                <b id="profilePack">
+                    --
+                </b>
+
+            </div>
+
+
+            <div class="profile-item">
+
+<span>
+قیمت پاکت
+</span>
+
+                <b id="profilePrice">
+                    --
+                </b>
+
+            </div>
+
+
+            <div class="profile-item">
+
+<span>
+هدف روزانه
+</span>
+
+                <b id="profileGoal">
+                    --
+                </b>
+
+            </div>
+
+
+            <div class="profile-item">
+
+<span>
+شروع مسیر
+</span>
+
+                <b id="profileStart">
+                    --
+                </b>
+
+            </div>
+
+
+            <div class="profile-item">
+
+<span>
+وضعیت ذخیره
+</span>
+
+                <b id="profileSaved">
+                    فعال ✅
+                </b>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SETTINGS -->
+
+    <section class="panel settings">
+
+        <div class="title">
+
+            <h3>
+                ⚙️ تنظیمات
+            </h3>
+
+            <span>
+هر تغییری ذخیره می‌شود
+</span>
+
+        </div>
+
+        <div class="fields">
+
+            <input
+                    class="field"
+                    id="daily"
+                    type="number"
+                    min="1"
+                    placeholder="سیگار در روز"
+            >
+
+            <input
+                    class="field"
+                    id="pack"
+                    type="number"
+                    min="1"
+                    placeholder="نخ در پاکت"
+            >
+
+            <input
+                    class="field"
+                    id="price"
+                    type="number"
+                    min="0"
+                    placeholder="قیمت پاکت"
+            >
+
+            <input
+                    class="field"
+                    id="goal"
+                    type="number"
+                    min="1"
+                    placeholder="هدف روزانه"
+            >
+
+        </div>
+
+        <div class="actions">
+
+            <button
+                    class="btn btn-green"
+                    onclick="saveManualSettings()">
+
+                💾 ذخیره تنظیمات
+
+            </button>
+
+
+            <button
+                    class="btn btn-blue"
+                    onclick="exportData()">
+
+                📥 گرفتن بکاپ
+
+            </button>
+
+
+            <label class="btn btn-blue">
+
+                📤 برگرداندن بکاپ
+
+                <input
+                        type="file"
+                        id="importFile"
+                        accept=".json"
+                        onchange="importData(event)"
+                >
+
+            </label>
+
+
+            <button
+                    class="btn btn-red"
+                    onclick="resetData()">
+
+                🗑️ پاک کردن اطلاعات
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <section class="quote">
+
+        <b>
+            «قرار نیست برای همیشه بجنگی؛ فقط امروز را مدیریت کن.»
+        </b>
+
+        <p>
+            هر روزی که ادامه می‌دهی، یک قدم از عادت قبلی فاصله می‌گیری.
+        </p>
+
+    </section>
+
+</main>
+
+
+<div
+        class="toast"
+        id="toast">
+</div>
+
+
+<script>
+
+    /* =====================================
+    DATABASE
+    ===================================== */
+
+    const STORAGE_KEY=
+        "NO_SMOKE_AI_PREMIUM_V3";
+
+    const defaultData={
+        daily:10,
+        pack:20,
+        price:0,
+        goal:30,
+        start:null,
+        missions:[],
+        missionDate:null,
+        chatHistory:[],
+        savedAt:null
+    };
+
+    let data=loadData();
+
+
+    function loadData(){
+
+        try{
+
+            const raw=
+                localStorage.getItem(STORAGE_KEY);
+
+            if(!raw)
+                return {...defaultData};
+
+            return{
+                ...defaultData,
+                ...JSON.parse(raw)
+            };
+
+        }catch(error){
+
+            return {...defaultData};
+
+        }
+
+    }
+
+
+    function saveData(){
+
+        data.savedAt=
+            new Date().toISOString();
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(data)
+        );
+
+        updateStorageUI();
+
+    }
+
+
+    /* =====================================
+    PARTICLES
+    ===================================== */
+
+    const canvas=
+        document.getElementById("particles");
+
+    const ctx=
+        canvas.getContext("2d");
+
+    let particles=[];
+
+
+    function resizeCanvas(){
+
+        canvas.width=
+            window.innerWidth;
+
+        canvas.height=
+            window.innerHeight;
+
+    }
+
+    resizeCanvas();
+
+    window.addEventListener(
+        "resize",
+        resizeCanvas
+    );
+
+
+    for(let i=0;i<100;i++){
+
+        particles.push({
+
+            x:Math.random()*innerWidth,
+
+            y:Math.random()*innerHeight,
+
+            r:Math.random()*2+.3,
+
+            vx:(Math.random()-.5)*.3,
+
+            vy:(Math.random()-.5)*.3
+
+        });
+
+    }
+
+
+    function particleAnimation(){
+
+        ctx.clearRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+        particles.forEach(p=>{
+
+            p.x+=p.vx;
+            p.y+=p.vy;
+
+            if(p.x<0)p.x=innerWidth;
+            if(p.x>innerWidth)p.x=0;
+
+            if(p.y<0)p.y=innerHeight;
+            if(p.y>innerHeight)p.y=0;
+
+            ctx.beginPath();
+
+            ctx.arc(
+                p.x,
+                p.y,
+                p.r,
+                0,
+                Math.PI*2
+            );
+
+            ctx.fillStyle="#00ff9d55";
+
+            ctx.fill();
+
+        });
+
+        requestAnimationFrame(
+            particleAnimation
+        );
+
+    }
+
+    particleAnimation();
+
+
+    /* =====================================
+    ENTER
+    ===================================== */
+
+    function enterApp(){
+
+        if(!data.start){
+
+            data.start=
+                new Date().toISOString();
+
+            saveData();
+
+        }
+
+        document.getElementById(
+            "intro"
+        ).style.opacity="0";
+
+        setTimeout(()=>{
+
+            document.getElementById(
+                "intro"
+            ).style.display="none";
+
+            document.getElementById(
+                "app"
+            ).style.display="block";
+
+            loadFields();
+
+            restoreChat();
+
+            updateAll();
+
+        },700);
+
+    }
+
+
+    /* =====================================
+    STORAGE UI
+    ===================================== */
+
+    function updateStorageUI(){
+
+        const status=
+            document.getElementById(
+                "storageStatus"
+            );
+
+        if(!status)
+            return;
+
+        status.innerText=
+            "ذخیره شد ✓";
+
+        setTimeout(()=>{
+
+            status.innerText=
+                "اطلاعات ذخیره است";
+
+        },1500);
+
+    }
+
+
+    function updateSavedTime(){
+
+        const el=
+            document.getElementById(
+                "savedTime"
+            );
+
+        if(
+            !data.savedAt
+        ){
+
+            el.innerText=
+                "هنوز ذخیره نشده";
+
+            return;
+
+        }
+
+        const d=
+            new Date(data.savedAt);
+
+        el.innerText=
+            "آخرین ذخیره: "+
+            d.toLocaleString(
+                "fa-IR"
+            );
+
+    }
+
+
+    /* =====================================
+    FIELDS
+    ===================================== */
+
+    function loadFields(){
+
+        document.getElementById(
+            "daily"
+        ).value=data.daily||"";
+
+        document.getElementById(
+            "pack"
+        ).value=data.pack||"";
+
+        document.getElementById(
+            "price"
+        ).value=data.price||"";
+
+        document.getElementById(
+            "goal"
+        ).value=data.goal||"";
+
+    }
+
+
+    function saveManualSettings(){
+
+        const daily=
+            Number(
+                document.getElementById("daily").value
+            );
+
+        const pack=
+            Number(
+                document.getElementById("pack").value
+            );
+
+        const price=
+            Number(
+                document.getElementById("price").value
+            );
+
+        const goal=
+            Number(
+                document.getElementById("goal").value
+            );
+
+
+        if(daily>0)
+            data.daily=daily;
+
+        if(pack>0)
+            data.pack=pack;
+
+        if(price>=0)
+            data.price=price;
+
+        if(goal>0)
+            data.goal=goal;
+
+
+        saveData();
+
+        updateAll();
+
+        showToast(
+            "تنظیمات ذخیره شد و در پروفایل قرار گرفت ✅"
+        );
+
+    }
+
+
+    /* =====================================
+    DASHBOARD
+    ===================================== */
+
+    function updateAll(){
+
+        if(!data.start)
+            return;
+
+        const start=
+            new Date(data.start);
+
+        const now=
+            new Date();
+
+        const hours=
+            Math.max(
+                0,
+                (now-start)/3600000
+            );
+
+        const days=
+            hours/24;
+
+        const cigarettes=
+            Math.floor(
+                hours*data.daily/24
+            );
+
+        const money=
+            data.pack>0
+                ?
+                (cigarettes/data.pack)*data.price
+                :
+                0;
+
+        const level=
+            Math.max(
+                1,
+                Math.floor(days/3)+1
+            );
+
+
+        document.getElementById(
+            "days"
+        ).innerText=
+            days.toFixed(1);
+
+
+        document.getElementById(
+            "hours"
+        ).innerText=
+            Math.floor(hours)
+                .toLocaleString("fa-IR");
+
+
+        document.getElementById(
+            "cigs"
+        ).innerText=
+            cigarettes
+                .toLocaleString("fa-IR");
+
+
+        document.getElementById(
+            "money"
+        ).innerText=
+            Math.floor(money)
+                .toLocaleString("fa-IR");
+
+
+        document.getElementById(
+            "level"
+        ).innerText=
+            level;
+
+
+        /* goal */
+
+        const goal=
+            Math.max(
+                1,
+                Number(data.goal)||30
+            );
+
+        const percent=
+            Math.min(
+                100,
+                (days/goal)*100
+            );
+
+        document.getElementById(
+            "goalFill"
+        ).style.width=
+            percent+"%";
+
+        document.getElementById(
+            "goalText"
+        ).innerText=
+            Math.floor(percent)+"%";
+
+
+        updateMissions();
+
+        updateProfile();
+
+        updateAchievements();
+
+        updateSavedTime();
+
+    }
+
+
+    /* =====================================
+    PROFILE
+    ===================================== */
+
+    function updateProfile(){
+
+        document.getElementById(
+            "profileDaily"
+        ).innerText=
+            (data.daily||0)+" نخ";
+
+        document.getElementById(
+            "profilePack"
+        ).innerText=
+            (data.pack||0)+" نخ";
+
+        document.getElementById(
+            "profilePrice"
+        ).innerText=
+            Number(data.price||0)
+                .toLocaleString("fa-IR")
+            +" تومان";
+
+        document.getElementById(
+            "profileGoal"
+        ).innerText=
+            (data.goal||0)+" روز";
+
+        document.getElementById(
+            "profileStart"
+        ).innerText=
+            data.start
+                ?
+                new Date(data.start)
+                    .toLocaleDateString("fa-IR")
+                :
+                "--";
+
+    }
+
+
+    /* =====================================
+    ACHIEVEMENTS
+    ===================================== */
+
+    function updateAchievements(){
+
+        if(!data.start)
+            return;
+
+        const days=
+            (
+                new Date()-new Date(data.start)
+            )/86400000;
+
+        unlock(
+            "badge1",
+            true
+        );
+
+        unlock(
+            "badge2",
+            days>=3
+        );
+
+        unlock(
+            "badge3",
+            days>=7
+        );
+
+        unlock(
+            "badge4",
+            days>=30
+        );
+
+    }
+
+
+    function unlock(id,state){
+
+        const el=
+            document.getElementById(id);
+
+        if(state)
+            el.classList.add("unlocked");
+        else
+            el.classList.remove("unlocked");
+
+    }
+
+
+    /* =====================================
+    MISSIONS
+    ===================================== */
+
+    function todayKey(){
+
+        return new Date()
+            .toISOString()
+            .slice(0,10);
+
+    }
+
+
+    function prepareMissions(){
+
+        const today=
+            todayKey();
+
+        if(data.missionDate!==today){
+
+            data.missionDate=today;
+            data.missions=[];
+
+            saveData();
+
+        }
+
+    }
+
+
+    function completeMission(id){
+
+        prepareMissions();
+
+        if(data.missions.includes(id))
+            return;
+
+        data.missions.push(id);
+
+        saveData();
+
+        updateMissions();
+
+        showToast(
+            "مأموریت انجام شد 🔥"
+        );
+
+    }
+
+
+    function updateMissions(){
+
+        prepareMissions();
+
+        document.getElementById(
+            "missionCount"
+        ).innerText=
+            data.missions.length+" / 3";
+
+
+        for(let i=1;i<=3;i++){
+
+            const el=
+                document.getElementById(
+                    "m"+i
+                );
+
+            if(data.missions.includes(i))
+                el.classList.add("done");
+            else
+                el.classList.remove("done");
+
+        }
+
+    }
+
+
+    /* =====================================
+    VOICE
+    ===================================== */
+
+    let recognition=null;
+
+
+    function startVoice(){
+
+        const SpeechRecognition=
+            window.SpeechRecognition||
+            window.webkitSpeechRecognition;
+
+
+        if(!SpeechRecognition){
+
+            showToast(
+                "مرورگر شما از تشخیص صدای فارسی پشتیبانی نمی‌کند."
+            );
+
+            return;
+
+        }
+
+
+        if(recognition){
+
+            try{
+                recognition.stop();
+            }catch(e){}
+
+        }
+
+
+        recognition=
+            new SpeechRecognition();
+
+        recognition.lang=
+            "fa-IR";
+
+        recognition.interimResults=
+            true;
+
+        recognition.continuous=
+            false;
+
+
+        const mic=
+            document.getElementById("mic");
+
+        const status=
+            document.getElementById(
+                "voiceStatus"
+            );
+
+        const output=
+            document.getElementById(
+                "voiceText"
+            );
+
+
+        mic.classList.add(
+            "listening"
+        );
+
+        status.innerText=
+            "دارم گوش می‌دم... 🎙️";
+
+
+        let finalText="";
+
+
+        recognition.onresult=
+            function(event){
+
+                let text="";
+
+
+                for(
+                    let i=event.resultIndex;
+                    i<event.results.length;
+                    i++
+                ){
+
+                    text+=
+                        event.results[i][0].transcript;
+
+                }
+
+
+                output.innerText=text;
+
+
+                if(
+                    event.results[
+                    event.results.length-1
+                        ].isFinal
+                ){
+
+                    finalText=text;
+
+                }
+
+            };
+
+
+        recognition.onerror=
+            function(){
+
+                mic.classList.remove(
+                    "listening"
+                );
+
+                status.innerText=
+                    "مشکلی در تشخیص صدا پیش آمد.";
+
+            };
+
+
+        recognition.onend=
+            function(){
+
+                mic.classList.remove(
+                    "listening"
+                );
+
+                if(finalText){
+
+                    processVoice(finalText);
+
+                }else{
+
+                    status.innerText=
+                        "صدایی تشخیص داده نشد.";
+
+                }
+
+            };
+
+
+        recognition.start();
+
+    }
+
+
+    /* =====================================
+    VOICE PARSER
+    ===================================== */
+
+    function normalizeNumbers(text){
+
+        const fa=[
+            "۰","۱","۲","۳","۴",
+            "۵","۶","۷","۸","۹"
+        ];
+
+        const ar=[
+            "٠","١","٢","٣","٤",
+            "٥","٦","٧","٨","٩"
+        ];
+
+        const en=[
+            "0","1","2","3","4",
+            "5","6","7","8","9"
+        ];
+
+
+        fa.forEach((x,i)=>{
+
+            text=
+                text.replaceAll(
+                    x,
+                    en[i]
+                );
+
+        });
+
+
+        ar.forEach((x,i)=>{
+
+            text=
+                text.replaceAll(
+                    x,
+                    en[i]
+                );
+
+        });
+
+
+        return text;
+
+    }
+
+
+    function processVoice(text){
+
+        let t=
+            normalizeNumbers(text)
+                .toLowerCase()
+                .replace(/,/g,"")
+                .replace(/٬/g,"");
+
+
+        let changes=[];
+
+
+        /* daily */
+
+        let daily=
+            t.match(
+                /(\d+(?:\.\d+)?)\s*(?:نخ|سیگار)\s*(?:در|تو|در طول)?\s*(?:روز|شبانه روز)?/
+            );
+
+        if(daily){
+
+            data.daily=
+                Number(daily[1]);
+
+            changes.push(
+                "روزانه "+data.daily+" نخ"
+            );
+
+        }
+
+
+        /* pack */
+
+        let pack=
+            t.match(
+                /(\d+(?:\.\d+)?)\s*(?:نخ)?\s*(?:داخل|توی|در)\s*(?:هر)?\s*پاکت/
+            );
+
+        if(pack){
+
+            data.pack=
+                Number(pack[1]);
+
+            changes.push(
+                "پاکت "+data.pack+" نخ"
+            );
+
+        }
+
+
+        /* price */
+
+        let price=
+            t.match(
+                /(\d+(?:\.\d+)?)\s*(هزار|میلیون)?\s*(?:تومان|تومن)/
+            );
+
+        if(price){
+
+            let value=
+                Number(price[1]);
+
+            if(price[2]==="هزار")
+                value*=1000;
+
+            if(price[2]==="میلیون")
+                value*=1000000;
+
+            data.price=value;
+
+            changes.push(
+                "قیمت "+
+                value.toLocaleString("fa-IR")+
+                " تومان"
+            );
+
+        }
+
+
+        /* save */
+
+        if(changes.length){
+
+            saveData();
+
+            loadFields();
+
+            updateAll();
+
+            document.getElementById(
+                "voiceStatus"
+            ).innerText=
+                "انجام شد؛ پروفایل به‌روزرسانی شد ✅";
+
+            showToast(
+                "اطلاعات صوتی ذخیره شد 🎙️"
+            );
+
+        }else{
+
+            document.getElementById(
+                "voiceStatus"
+            ).innerText=
+                "اطلاعات عددی مشخصی پیدا نکردم. دوباره امتحان کن.";
+
+        }
+
+    }
+
+
+    /* =====================================
+    AI CHAT
+    ===================================== */
+
+    function addMessage(
+        text,
+        type,
+        save=true
+    ){
+
+        const messages=
+            document.getElementById(
+                "messages"
+            );
+
+        const div=
+            document.createElement(
+                "div"
+            );
+
+        div.className=
+            "message "+type;
+
+        div.innerText=text;
+
+        messages.appendChild(div);
+
+        messages.scrollTop=
+            messages.scrollHeight;
+
+
+        if(save){
+
+            data.chatHistory.push({
+                text:text,
+                type:type,
+                time:Date.now()
+            });
+
+
+            if(data.chatHistory.length>50){
+
+                data.chatHistory=
+                    data.chatHistory.slice(-50);
+
+            }
+
+            saveData();
+
+        }
+
+    }
+
+
+    function restoreChat(){
+
+        if(
+            !data.chatHistory||
+            !data.chatHistory.length
+        )
+            return;
+
+
+        const messages=
+            document.getElementById(
+                "messages"
+            );
+
+        messages.innerHTML="";
+
+
+        data.chatHistory.forEach(item=>{
+
+            const div=
+                document.createElement(
+                    "div"
+                );
+
+            div.className=
+                "message "+item.type;
+
+            div.innerText=
+                item.text;
+
+            messages.appendChild(div);
+
+        });
+
+
+        messages.scrollTop=
+            messages.scrollHeight;
+
+    }
+
+
+    /* =====================================
+    AI RESPONSES
+    ===================================== */
+
+    const AI={
+
+        craving:[
+            "اول چند دقیقه به خودت فرصت بده. آب بنوش، چند نفس آرام بکش و اگر می‌توانی از محیطی که معمولاً در آن سیگار می‌کشیدی فاصله بگیر.",
+            "هوس سیگار معمولاً موجی است؛ لازم نیست با آن بجنگی. فقط تصمیم را چند دقیقه عقب بینداز و یک کار دیگر انجام بده.",
+            "الان لازم نیست درباره فردا تصمیم بگیری. فقط همین چند دقیقه را بدون سیگار مدیریت کن.",
+            "اگر می‌توانی کمی راه برو، آب بخور یا توجهت را به یک کار دیگر بده. بعد دوباره شدت هوس را بررسی کن."
+        ],
+
+        hard:[
+            "سخت شدن مسیر به معنی خراب شدن مسیر نیست. امروز را کوچک‌تر کن و فقط روی قدم بعدی تمرکز کن.",
+            "اگر امروز سخت بود، خودت را سرزنش نکن. بررسی کن چه چیزی باعث وسوسه شد و از همان تجربه برای دفعه بعد استفاده کن.",
+            "لازم نیست همه مسیر را یک‌جا تحمل کنی. فقط همین ساعت را مدیریت کن.",
+            "روزهای سخت ممکن‌اند. مهم این است که یک لحظه سخت را به دلیل کنار گذاشتن کل مسیر تبدیل نکنی."
+        ],
+
+        motivation:[
+            "پیشرفت فقط تعداد روزها نیست؛ هر بار که در برابر یک عادت قدیمی مکث می‌کنی، داری کنترل بیشتری پیدا می‌کنی.",
+            "به جای فکر کردن به یک آینده خیلی دور، روی امروز تمرکز کن. امروز قابل مدیریت‌تر است.",
+            "مسیر خودت را با بقیه مقایسه نکن. معیار بهتر، تفاوت خودت با روزهای قبلی است.",
+            "اگر امروز انرژی کمی داری، هدفت را کوچک کن؛ ادامه دادن حتی با قدم‌های کوچک هم ادامه دادن است."
+        ],
+
+        greeting:[
+            "سلام 🌱 خوش اومدی. امروز بیشتر دوست داری درباره هوس سیگار حرف بزنیم یا پیشرفتت رو بررسی کنیم؟",
+            "سلام! 🤖 من آماده‌ام. بگو امروز سخت‌ترین قسمت مسیرت چی بوده.",
+            "خوش اومدی 🌿 بگو الان حالت چطوره و چه چیزی بیشتر ذهنت رو درگیر کرده؟"
+        ],
+
+        money:[
+            "محاسبه پول ذخیره‌شده بر اساس تعداد سیگار روزانه، تعداد نخ در پاکت و قیمت پاکت انجام می‌شود.",
+            "اگر قیمت پاکت تغییر کرده، می‌توانی فقط با صدایت قیمت جدید را بگویی تا پروفایلت به‌روزرسانی شود.",
+            "عدد پول ذخیره‌شده یک تخمین بر اساس اطلاعاتی است که در پروفایل ثبت کرده‌ای."
+        ],
+
+        progress:[
+            "پیشرفتت در بالای صفحه ثبت می‌شود؛ روزها، ساعت‌ها، سیگارهای نخریده و پول ذخیره‌شده را می‌بینی.",
+            "اگر اطلاعاتت درست باشد، داشبورد خودش با گذشت زمان به‌روزرسانی می‌شود.",
+            "پروفایل و تاریخ شروع در مرورگر ذخیره شده‌اند تا با بستن صفحه از بین نروند."
+        ],
+
+        general:[
+            "متوجه شدم. بیا موضوع را به یک قدم کوچک تبدیل کنیم. الان دقیقاً چه چیزی بیشتر اذیتت می‌کند؟",
+            "باشه. برای اینکه بهتر کمکت کنم، بگو این موضوع بیشتر مربوط به هوس، انگیزه، پیشرفت یا تنظیمات سایت است.",
+            "می‌فهمم. جزئیات بیشتری بگو تا جواب مرتبط‌تری بدهم.",
+            "بیا قدم‌به‌قدم جلو برویم. لازم نیست همه چیز را همین الان حل کنیم."
+        ]
+
+    };
+
+
+    function random(arr){
+
+        return arr[
+            Math.floor(
+                Math.random()*arr.length
+            )
+            ];
+
+    }
+
+
+    function topic(text){
+
+        const t=
+            text.toLowerCase();
+
+
+        if(
+            /هوس|وسوسه|سیگار میخوام|سیگار می‌خوام|بکشم/
+                .test(t)
+        )
+            return "craving";
+
+
+        if(
+            /سخت|خسته|نمیتونم|نمی‌تونم|شکست|لغزش/
+                .test(t)
+        )
+            return "hard";
+
+
+        if(
+            /انگیزه|تشویق|موفق|ادامه|بی‌حوصله/
+                .test(t)
+        )
+            return "motivation";
+
+
+        if(
+            /پول|هزینه|قیمت|صرفه|ذخیره/
+                .test(t)
+        )
+            return "money";
+
+
+        if(
+            /پیشرفت|چند روز|چقدر|آمار|روز بدون/
+                .test(t)
+        )
+            return "progress";
+
+
+        if(
+            /سلام|درود|خوبی|هی/
+                .test(t)
+        )
+            return "greeting";
+
+
+        return "general";
+
+    }
+
+
+    function aiReply(text){
+
+        const t=
+            topic(text);
+
+        let reply=
+            random(
+                AI[t]
+            );
+
+
+        /* context */
+
+        if(t==="progress"){
+
+            const hours=
+                data.start
+                    ?
+                    (new Date()-new Date(data.start))/3600000
+                    :
+                    0;
+
+            const days=
+                (hours/24).toFixed(1);
+
+            reply+=
+                "\n\nطبق اطلاعات ذخیره‌شده، حدود "+
+                days+
+                " روز از شروع مسیرت گذشته.";
+
+        }
+
+
+        if(t==="money"){
+
+            reply+=
+                "\n\nتنظیم فعلی پروفایل: "+
+                (data.daily||0)+
+                " نخ در روز، "+
+                (data.pack||0)+
+                " نخ در پاکت و قیمت "+
+                Number(data.price||0)
+                    .toLocaleString("fa-IR")+
+                " تومان.";
+
+        }
+
+
+        if(t==="craving"){
+
+            const missions=
+                data.missions?.length||0;
+
+            reply+=
+                "\n\nامروز "+
+                missions+
+                " مأموریت از ۳ مأموریتت را انجام داده‌ای.";
+
+        }
+
+
+        return reply;
+
+    }
+
+
+    function sendChat(){
+
+        const input=
+            document.getElementById(
+                "chatInput"
+            );
+
+        const text=
+            input.value.trim();
+
+
+        if(!text)
+            return;
+
+
+        addMessage(
+            text,
+            "user"
+        );
+
+        input.value="";
+
+
+        const messages=
+            document.getElementById(
+                "messages"
+            );
+
+        const typing=
+            document.createElement(
+                "div"
+            );
+
+        typing.className=
+            "message ai typing";
+
+        typing.innerText=
+            "مربی در حال فکر کردن... 🤖";
+
+        messages.appendChild(typing);
+
+        messages.scrollTop=
+            messages.scrollHeight;
+
+
+        setTimeout(()=>{
+
+                typing.remove();
+
+                addMessage(
+                    aiReply(text),
+                    "ai"
+                );
+
+            },
+            700+Math.random()*900
+        );
+
+    }
+
+
+    /* =====================================
+    EXPORT
+    ===================================== */
+
+    function exportData(){
+
+        const backup={
+            app:"NO SMOKE AI",
+            version:3,
+            exportedAt:new Date().toISOString(),
+            data:data
+        };
+
+
+        const blob=
+            new Blob(
+                [
+                    JSON.stringify(
+                        backup,
+                        null,
+                        2
+                    )
+                ],
+                {
+                    type:"application/json"
+                }
+            );
+
+
+        const url=
+            URL.createObjectURL(blob);
+
+        const a=
+            document.createElement("a");
+
+        a.href=url;
+
+        a.download=
+            "no-smoke-ai-backup.json";
+
+        a.click();
+
+        URL.revokeObjectURL(url);
+
+        showToast(
+            "فایل بکاپ ساخته شد 📥"
+        );
+
+    }
+
+
+    /* =====================================
+    IMPORT
+    ===================================== */
+
+    function importData(event){
+
+        const file=
+            event.target.files[0];
+
+        if(!file)
+            return;
+
+
+        const reader=
+            new FileReader();
+
+
+        reader.onload=function(){
+
+            try{
+
+                const backup=
+                    JSON.parse(
+                        reader.result
+                    );
+
+                if(
+                    !backup.data
+                )
+                    throw new Error();
+
+
+                data={
+                    ...defaultData,
+                    ...backup.data
+                };
+
+                saveData();
+
+                loadFields();
+
+                restoreChat();
+
+                updateAll();
+
+                showToast(
+                    "اطلاعات بکاپ برگردانده شد ✅"
+                );
+
+            }catch(e){
+
+                showToast(
+                    "فایل بکاپ معتبر نیست ❌"
+                );
+
+            }
+
+        };
+
+
+        reader.readAsText(file);
+
+    }
+
+
+    /* =====================================
+    RESET
+    ===================================== */
+
+    function resetData(){
+
+        const ok=
+            confirm(
+                "تمام اطلاعات، تنظیمات و تاریخچه چت پاک شود؟"
+            );
+
+        if(!ok)
+            return;
+
+
+        localStorage.removeItem(
+            STORAGE_KEY
+        );
+
+        data={
+            ...defaultData,
+            start:new Date().toISOString()
+        };
+
+        saveData();
+
+        location.reload();
+
+    }
+
+
+    /* =====================================
+    ENTER KEY
+    ===================================== */
+
+    document
+        .getElementById("chatInput")
+        .addEventListener(
+            "keydown",
+            function(e){
+
+                if(e.key==="Enter")
+                    sendChat();
+
+            });
+
+
+    /* =====================================
+    AUTO RESTORE
+    ===================================== */
+
+    if(
+        localStorage.getItem(STORAGE_KEY)
+    ){
+
+        document.getElementById(
+            "intro"
+        ).style.display="none";
+
+        document.getElementById(
+            "app"
+        ).style.display="block";
+
+        loadFields();
+
+        restoreChat();
+
+        updateAll();
+
+    }
+
+
+    /* =====================================
+    LIVE
+    ===================================== */
+
+    setInterval(
+        updateAll,
+        1000
+    );
+
+</script>
+
+</body>
+</html>
+
+</body>
+</html>
